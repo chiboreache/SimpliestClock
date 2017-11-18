@@ -1,2 +1,0 @@
-# seschtie.github.io
-asdasd
