@@ -61,8 +61,8 @@
         m = new Date().getMinutes().toString();
         s = new Date().getSeconds().toString();
         t = h + " " + m + " " + s;
+        }
         document.getElementById("magic").innerHTML = t;
-        clockWatch = setTimeout(SimpliestClock, 500);
-    }
+        setInterval(SimpliestClock, 500);
 </script>
 </html>
