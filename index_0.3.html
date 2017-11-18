@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Flexpage</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+    document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
+    </script>
+    <style>
+    .container {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        background: linear-gradient(to top, #6A82FB, #3F5EFB);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .fbox1 {
+        height: 15%;
+    }
+
+    .fbox2 {
+        display: flex;
+    }
+
+    .fbox3 {
+        height: 15%;
+    }
+
+    .clock {
+        justify-content: space-between;
+        background: linear-gradient(to bottom, #24C6DC, #514A9D);
+        width: 100%;
+        font-family: monospace;
+    }
+
+    p {
+        font-size: calc(16vh + 9vw);
+        font-style: bold;
+        text-align: center;
+        margin-bottom: 70%;
+    }
+    </style>
+</head>
+
+<body onload="SimpliestClock()">
+    <div class="container">
+        <div class="fbox1"></div>
+        <div class="fbox2">
+            <div class="clock">
+                <p id="magic"></p>
+            </div>
+        </div>
+        <div class="fbox3"></div>
+    </div>
+</body>
+<script>
+    function SimpliestClock() {
+        h = new Date().getHours().toString();
+        m = new Date().getMinutes().toString();
+        s = new Date().getSeconds().toString();
+        t = h + " " + m + " " + s;
+        document.getElementById("magic").innerHTML = t;
+        clockWatch = setTimeout(SimpliestClock, 500);
+    }
+</script>
+</html>
