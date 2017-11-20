@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>flexclock</title>
+    <title>Flexpage</title>
     <style>
     .container {
         position: fixed;
@@ -47,7 +46,7 @@
     </style>
 </head>
 
-<body onload="setInterval(refresh, 50)">
+<body onload="SimpliestClock()">
     <div class="container">
         <div class="fbox1"></div>
         <div class="fbox2">
@@ -58,37 +57,20 @@
         <div class="fbox3"></div>
     </div>
 </body>
-    <script>
-
-            function clock() {
-                i = new Date();
-                return `${i.getHours()} ${i.getMinutes()} ${i.getSeconds()}`;
-             };
-
-             function refresh() {
-               document.getElementById("magic").innerHTML = clock();
-             };
-
-
-
-
-    </script>
+<script>
+    function SimpliestClock() {
+        let h = new Date().getHours();
+        let m = new Date().getMinutes();
+        let s = new Date().getSeconds();
+       /* t = h + " " + m + " " + s;*/
+        let t = ` ${h} ${m} ${s} `;
+        document.getElementById("magic").innerHTML = t;
+        }
+        setInterval(SimpliestClock, 500);
+</script>
 </html>
 
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- return min + Math.floor(Math.random()*(max-min+1))
-
 function undefined() {  
   // проблема решена
 } -->
