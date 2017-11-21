@@ -9,7 +9,7 @@
     </script>
 
     <style>
-    .container {
+    #container {
         position: fixed;
         position: fixed;
         height: 100%;
@@ -22,31 +22,31 @@
         justify-content: space-between;
     }
 
-    .fbox1 {
+    #fbox1 {
+        background: #7F7FF2;
         display: flex;
         height: 30%;
-        background: #7F7FF2;
     }
 
-    .fbox2 {
+    #fbox2 {
+        background: #F771F7;
         display: flex;
         color: white;
-        background: #F771F7;
-       
         width: 100%;
         font-family: monospace;
     }
 
-    .fbox3 {
-        display: flex;
-        height: 30%;
-        width: 33%;
+    #fbox3 {
         background: #70F2A4;
+        display: flex;
         align-items: center;
         align-self: flex-end;
+        height: 30%;
+        width: 33%;
+
     }
 
-    .input {
+    #input {
         background: #E6DF2C;
         display: flex;
         width: 100%;
@@ -56,6 +56,7 @@
     p {
         font-size: calc(16vh + 9vw);
         margin: auto;
+        text-align: center;
     }
 
     ul {
@@ -63,22 +64,26 @@
     }
 
     li {
-        padding: 14px;
-        float: left;
+        padding: 5px;
+        margin-right: 10px;
+        float: right;
     }
     </style>
 </head>
 
 <body onload="setInterval(refresh, 50)">
-    <div class="container">
-        <div class="fbox1"></div>
-        <div class="fbox2"><p id="timeGoes"></p></div>
-        <div class="fbox3">
-            <div class="input">
+    <div id ="container">
+        <div id ="fbox1"></div>
+        <div id ="fbox2"><p id="timeGoes"></p></div>
+        <div id ="fbox3">
+            <div id ="input">
                 <ul>
-                    <li>btn_1</li>
-                    <li>btn_2</li>
-                    <li>btn_3</li>
+                    <li><input type="text" id="text" required size="10" 
+                               placeholder="#HEX" minlength="6" maxlength="6">      </li>
+                    <li><label for="colorPick">Поменяй меня</label>
+                        <input type="color" value="#7E8384" id="colorPick">         </li>
+                    <li><label for="colorPick">Градиент</label>
+                    <input type="color" value="#7E8384" id="gradientPick">         </li>
                 </ul>
             </div>
         </div>
@@ -86,15 +91,31 @@
 </body>
     <script>
 
-            function clock() {
-                t = new Date();
-                return `${t.getHours()} ${t.getMinutes()} ${t.getSeconds()}`;
-             };
 
+
+            function clock() {
+                t = new Date; 
+                t.h = t.getHours; 
+                t.m = t.getMinutes; 
+                t.s = t.getSeconds
+                return `${t.h()} ${t.m()} ${t.s()}`;
+             };
              function refresh() {
                document.getElementById("timeGoes").innerHTML = clock();
              };
 
+
+
+            var colorPick;
+            window.addEventListener("load", startUp);
+            function startUp() { 
+                colorPick = document.getElementById("colorPick"); 
+                colorPick.addEventListener("input", updaTer); 
+                colorPick.select();
+            }
+            function updaTer(event) {
+                document.getElementById("container").style.background = event.target.value ;
+            }
 
 
 
