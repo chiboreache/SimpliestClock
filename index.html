@@ -5,12 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>flexclock</title>
-    <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
-    </script>
-
     <style>
     #container {
-        position: fixed;
         position: fixed;
         height: 100%;
         width: 100%;
@@ -43,7 +39,6 @@
         align-self: flex-end;
         height: 30%;
         width: 33%;
-
     }
 
     #input {
@@ -71,53 +66,65 @@
     </style>
 </head>
 
-<body onload="setInterval(refresh, 50)">
-    <div id ="container">
-        <div id ="fbox1"></div>
-        <div id ="fbox2"><p id="timeGoes"></p></div>
-        <div id ="fbox3">
-            <div id ="input">
+<body onload="setInterval(clockTick, 50)">
+    <div id="container">
+        <div id="fbox1"></div>
+        <div id="fbox2">
+            <p id="timeGoes"></p>
+        </div>
+        <div id="fbox3">
+            <div id="input">
                 <ul>
-                    <li><input type="text" id="text" required size="10" 
-                               placeholder="#HEX" minlength="6" maxlength="6">      </li>
-                    <li><label for="colorPick">Поменяй меня</label>
-                        <input type="color" value="#7E8384" id="colorPick">         </li>
-                    <li><label for="colorPick">Градиент</label>
-                    <input type="color" value="#7E8384" id="gradientPick">         </li>
+                    <li>
+                        <input type="text" id="text" required size="10" placeholder="#HEX" minlength="6" maxlength="6"> </li>
+                    <li>
+                        <label for="colorPick">Поменяй меня</label>
+                        <input type="color" value="#7E8384" id="colorPick"> </li>
+                    <li>
+                        <label for="colorPick">Градиент</label>
+                        <input type="color" value="#7E8384" id="gradientPick"> </li>
                 </ul>
             </div>
         </div>
     </div>
 </body>
-    <script>
+<script>
+/*jshint esversion: 6 */
+function formatCurrentTime() {
+    let currentDate = new Date();
+    let hours = currentDate.getHours();
+    let minutes = currentDate.getMinutes();
+    let seconds = currentDate.getSeconds();
+    return (`${hours}   ${minutes}   ${seconds}`);
+}
+
+
+function clockPrint() {
+    document.getElementById("timeGoes").innerHTML = formatCurrentTime();
+}
+
+
+function clockTick() {
+    setInterval(() => {
+        clockPrint();
+    }, 1000);
+}
 
 
 
-            function clock() {
-                t = new Date; 
-                t.h = t.getHours; 
-                t.m = t.getMinutes; 
-                t.s = t.getSeconds
-                return `${t.h()} ${t.m()} ${t.s()}`;
-             };
-             function refresh() {
-               document.getElementById("timeGoes").innerHTML = clock();
-             };
 
+var colorPick;
+window.addEventListener("load", startUp);
 
+function startUp() { 
+    colorPick = document.getElementById("colorPick"); 
+    colorPick.addEventListener("input", updaTer); 
+    colorPick.select();
+}
 
-            var colorPick;
-            window.addEventListener("load", startUp);
-            function startUp() { 
-                colorPick = document.getElementById("colorPick"); 
-                colorPick.addEventListener("input", updaTer); 
-                colorPick.select();
-            }
-            function updaTer(event) {
-                document.getElementById("container").style.background = event.target.value ;
-            }
+function updaTer(event) {
+    document.getElementById("container").style.background = event.target.value;
+}
+</script>
 
-
-
-    </script>
 </html>
